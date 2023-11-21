@@ -1,13 +1,30 @@
-const express = require('express')
-const app = express()
+require('dotenv').config()
 
-import { Resend } from 'resend'
+import { Resend } from 'resend';
+import express, { Request, Response } from 'express';
 
-const resend = new Resend('re_j9WqZXgq_NvZTZWLd5HeHHoYPg4zacXKV')
+const resend = new Resend('re_j9WqZXgq_NvZTZWLd5HeHHoYPg4zacXKV');
+const app = express();
 
-resend.emails.send({
-    from: 'onboarding@resend.dev',
-    to: 'nikfedotoff@mail.ru',
-    subject: 'Hello World',
-    html: '<p>Congrats on sending your <strong>first email</strong>!</p>',
+app.get('/', async (req, res) => {
+  try {
+    const data = await resend.emails.send({
+      from: 'Acme <onboarding@resend.dev>',
+      to: ['delivered@resend.dev'],
+      subject: 'Hello World',
+      html: '<strong>it works!</strong>',
+    });
+
+    res.status(200).json(data);
+  } catch(error) {
+    res.status(400).json(error);
+  }
 })
+
+app.listen(3000, () => {
+  if (!process.env.RESEND_API_KEY) {
+    throw `Abort: You need to define RESEND_API_KEY in the .env file.`;
+  }
+  
+  console.log('Listening on http://localhost:3000');
+});
