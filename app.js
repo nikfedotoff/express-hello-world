@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 import { Resend } from 'resend';
-import express, { Request, Response } from 'express';
+import express from 'express';
 
 const resend = new Resend('re_j9WqZXgq_NvZTZWLd5HeHHoYPg4zacXKV');
 const app = express();
