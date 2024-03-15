@@ -1,21 +1,25 @@
 import dotenv from 'dotenv'
 import { Resend } from 'resend'
 import express from 'express'
+import cors from 'cors'
 
 dotenv.config()
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const app = express()
 
+app.use(express.json())
+app.use(cors({ origin: 'https://the3floor.com' }))
+
 app.post('/', async (req, res) => {
     try {
         const { name, phone, company, text } = req.body
 
-        const message = `A new client has submitted information:
-			- Name: ${name}
-			- Company: ${company}
-			- Phone: ${phone}
-			- Text: ${text}`
+        const message = `A new client has submitted information:<br /><br />
+			<br />- Name: ${name}
+			<br />- Company: ${company}
+			<br />- Phone: ${phone}
+			<br />- Text: ${text}`
 
         const data = await resend.emails.send({
             from: 'The3floor.com <onboarding@resend.dev>',

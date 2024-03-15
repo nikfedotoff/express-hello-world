@@ -12,6 +12,7 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "resend": "^2.0.0"
