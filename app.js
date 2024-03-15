@@ -7,13 +7,21 @@ dotenv.config()
 const resend = new Resend(process.env.RESEND_API_KEY)
 const app = express()
 
-app.get('/', async (req, res) => {
+app.post('/', async (req, res) => {
     try {
+        const { name, phone, company, text } = req.body
+
+        const message = `A new client has submitted information:
+			- Name: ${name}
+			- Company: ${company}
+			- Phone: ${phone}
+			- Text: ${text}`
+
         const data = await resend.emails.send({
-            from: 'Acme <onboarding@resend.dev>',
+            from: 'The3floor.com <onboarding@resend.dev>',
             to: ['nikfedotoff@mail.ru'],
-            subject: 'Hello World',
-            html: '<strong>it works!</strong>',
+            subject: 'New form submission!',
+            html: `<strong>${message}</strong>`,
         })
 
         res.status(200).json(data)
