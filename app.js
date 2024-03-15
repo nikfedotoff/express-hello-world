@@ -4,7 +4,7 @@ import express from 'express'
 
 dotenv.config()
 
-const resend = new Resend('re_j9WqZXgq_NvZTZWLd5HeHHoYPg4zacXKV')
+const resend = new Resend(process.env.RESEND_API_KEY)
 const app = express()
 
 app.get('/', async (req, res) => {
