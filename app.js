@@ -23,7 +23,7 @@ app.post('/', async (req, res) => {
 
         const data = await resend.emails.send({
             from: 'The3floor.com <onboarding@resend.dev>',
-            to: ['nikfedotoff@mail.ru'],
+            to: ['jacopostecchini@gmail.com'],
             subject: 'New form submission!',
             html: `<strong>${message}</strong>`,
         })
