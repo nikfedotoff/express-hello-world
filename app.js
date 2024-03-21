@@ -22,8 +22,8 @@ app.post('/', async (req, res) => {
 			<br />- Text: ${text}`
 
         const data = await resend.emails.send({
-            from: 'The3floor.com <onboarding@resend.dev>',
-            to: ['jacopostecchini@gmail.com'],
+            from: 'The3floor.com <hi@the3floor.com>',
+            to: ['jacopostecchini@gmail.com', 'nikvicin@gmail.com'],
             subject: 'New form submission!',
             html: `<strong>${message}</strong>`,
         })
